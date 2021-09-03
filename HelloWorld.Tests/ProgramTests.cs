@@ -19,16 +19,23 @@ namespace HelloWorld.Tests
         }
 
         [Fact]
-        public void IsLeapYear_checks_Divisible_By_Four()
+        public void IsLeapYear_true_When_Divisible_By_Four()
         {
-            var notDivisible = 5;
             var divisible = 4;
 
-            var resultNotDivisible = Program.IsLeapYear(notDivisible);
             var resultDivisible = Program.IsLeapYear(divisible);
 
-            Assert.False(resultNotDivisible);
             Assert.True(resultDivisible);
+        }
+
+        [Fact]
+        public void IsLeapYear_false_When_Not_Divisible_By_Four()
+        {
+            var divisible = 5;
+
+            var result = Program.IsLeapYear(divisible);
+
+            Assert.False(result);
         }
     }
 }
