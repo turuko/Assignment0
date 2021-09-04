@@ -37,5 +37,25 @@ namespace HelloWorld.Tests
 
             Assert.False(result);
         }
+
+        [Fact]
+        public void IsLeapYear_false_When_Divisible_By_100()
+        {
+            var input = 100;
+
+            var result = Program.IsLeapYear(input);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void IsLeapYear_true_When_Divisible_by_400()
+        {
+            var input = 400;
+
+            var result = Program.IsLeapYear(input);
+
+            Assert.True(result);
+        }
     }
 }
