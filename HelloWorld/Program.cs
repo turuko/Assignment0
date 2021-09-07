@@ -8,15 +8,36 @@ namespace HelloWorld
         {
             Console.Out.Write("Enter year: ");
             var input = Console.ReadLine();
-            PrintIsLeapYear(input);
+            while(!PrintIsLeapYear(input))
+            {
+                Console.Out.Write("Enter year: ");
+                input = Console.ReadLine();
+            }
         }
 
-        public static void PrintIsLeapYear(string input)
+        public static bool PrintIsLeapYear(string input)
         {
-            if(!IsLeapYear(int.Parse(input)))
-                Console.Out.WriteLine("nay");
+            int year = 0;
+
+            if(int.TryParse(input, out year) && year >= 1582)
+            {
+                if(!IsLeapYear(year))
+                {
+                    Console.Out.WriteLine("nay");
+                    return true;
+                }
+                else
+                {
+                    Console.Out.WriteLine("yay");
+                    return true;
+                }
+            }
             else
-                Console.Out.WriteLine("yay");
+            {
+                Console.Out.WriteLine("Please enter a year after 1582\n");
+                return false;
+            }
+
         }
 
         public static bool IsLeapYear(int year)
