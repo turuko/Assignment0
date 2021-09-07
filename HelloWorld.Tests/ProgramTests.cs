@@ -7,16 +7,27 @@ namespace HelloWorld.Tests
     public class ProgramTests
     {
         [Fact]
-        public void Main_prints_Nay_If_Not_Leap_Year()
+        public void PrintIsLeapYear_prints_Nay_If_Not_Leap_Year()
         {
             var writer = new StringWriter();
             Console.SetOut(writer);
 
-            Program.Main(new string[0]);
+            Program.PrintIsLeapYear("1900");
             var output = writer.GetStringBuilder().ToString().Trim();
 
-            
             Assert.Equal("nay", output);
+        }
+
+        [Fact]
+        public void PrintIsLeapYear_prints_Yay_If_Leap_Year()
+        {
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            Program.PrintIsLeapYear("2000");
+            var output = writer.GetStringBuilder().ToString().Trim();
+
+            Assert.Equal("yay", output);
         }
 
         [Fact]
