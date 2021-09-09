@@ -12,7 +12,7 @@ namespace HelloWorld.Tests
             var writer = new StringWriter();
             Console.SetOut(writer);
 
-            Program.PrintIsLeapYear("1900");
+            Program.PrintIsLeapYear(1900);
             var output = writer.GetStringBuilder().ToString().Trim();
 
             Assert.Equal("nay", output);
@@ -24,34 +24,75 @@ namespace HelloWorld.Tests
             var writer = new StringWriter();
             Console.SetOut(writer);
 
-            Program.PrintIsLeapYear("2000");
+            Program.PrintIsLeapYear(2000);
             var output = writer.GetStringBuilder().ToString().Trim();
 
             Assert.Equal("yay", output);
         }
 
         [Fact]
-        public void PrintIsLeapYear_prints_Error_If_Input_Not_Number()
+        public void ValidateInput_prints_Error_If_Input_Not_Number()
         {
             var writer = new StringWriter();
             Console.SetOut(writer);
+            var year = 0;
 
-            Program.PrintIsLeapYear("Hello");
+            Program.ValidateInput("Hello", out year);
             var output = writer.GetStringBuilder().ToString().Trim();
 
             Assert.Equal("Please enter a year after 1582", output);
         }
 
         [Fact]
-        public void PrintIsLeapYear_prints_Error_If_Input_Before_1582()
+        public void ValidateInput_prints_Error_If_Input_Before_1582()
         {
             var writer = new StringWriter();
             Console.SetOut(writer);
+            var year = 0;
 
-            Program.PrintIsLeapYear("1581");
+            Program.ValidateInput("1581", out year);
             var output = writer.GetStringBuilder().ToString().Trim();
 
             Assert.Equal("Please enter a year after 1582", output);
+        }
+
+        [Fact]
+        public void ValidateInput_False_If_Input_Not_Number()
+        {
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+            var year = 0;
+
+            var result = Program.ValidateInput("Hello", out year);
+
+            Assert.False(result);
+            Assert.Equal(0,year);
+        }
+
+        [Fact]
+        public void ValidateInput_False_If_Input_Before_1582()
+        {
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+            var year = 0;
+
+            var result = Program.ValidateInput("1581", out year);
+
+            Assert.False(result);
+            Assert.Equal(1581,year);
+        }
+
+        [Fact]
+        public void ValidateInput_True_If_Input_Correct()
+        {
+            var writer = new StringWriter();
+            Console.SetOut(writer);
+            var year = 0;
+
+            var result = Program.ValidateInput("1582", out year);
+
+            Assert.True(result);
+            Assert.Equal(1582,year);
         }
 
         [Fact]
